@@ -1,0 +1,23 @@
+ nav ul li  {
+    display: inline;
+    color: #f0ebcc;
+    font-weight: bold;
+    padding: 20px;
+    margin: 30px;
+    background-color: #3f3697;
+    
+}
+header {
+    background-color: #3f3697;
+    padding: 20px;
+    margin: 30px;
+}
+body {
+background-color:#f0ebcc ;
+}
+h3 {
+    background-color: #3d84b8;
+    color: #f0ebcc;
+    
+}
+
