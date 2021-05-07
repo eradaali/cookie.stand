@@ -130,15 +130,38 @@ createCol(3,'Dubai')
 createCol(4,'Paris')
 createCol(5,'Lima')
 createCol(6,'Totals')
+let totalPerCol=[];
 for(let i=1;i<=6;i++){
   for(let j=1;j<15;j++){
     
 
-    myArray[i-1].randomCustNumbe();
+    if(myArray[i-1]){
+    let value=myArray[i-1].randomCustPerHour[Math.floor(Math.random() * 13) + 1    ];
 
-  createCol(i,myArray[i-1].randomCustPerHour[Math.floor(Math.random() * 13) + 1    ],j)
+    debugger
+    if(totalPerCol[j-1])
+    totalPerCol[j-1]+=value;
+    else totalPerCol.push(value);
+    console.log(totalPerCol);
+
+  createCol(i,value,j)}
   }
- createCol(i,myArray[i-1].totalDailyLocation) 
+  if(myArray[i-1]){
+    let value=myArray[i-1].totalDailyLocation;
+    if(totalPerCol[14])
+    totalPerCol[14]+=value;
+
+    else 
+    totalPerCol.push(value);
+
+    createCol(i,value) 
+
+  }
+
+}
+for(let index=0;index<15;index++){
+  debugger
+  createCol(6,totalPerCol[index],index+1)
 
 }
 

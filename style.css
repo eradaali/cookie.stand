@@ -1,11 +1,23 @@
- nav ul li  {
+ nav ul li   {
     display: inline;
     color: #f0ebcc;
     font-weight: bold;
     padding: 20px;
     margin: 30px;
     background-color: #3f3697;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
     
+}
+#sales {
+    color: #f0ebcc;
+     
+}
+#list li {
+    background-color:#f0ebcc;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #3f3697;
 }
 header {
     background-color: #3f3697;
@@ -14,10 +26,29 @@ header {
 }
 body {
 background-color:#f0ebcc ;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+color:#3d84b8;
 }
 h3 {
     background-color: #3d84b8;
     color: #f0ebcc;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     
+}
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+ .setimg1{
+display: inline;
+padding: 10px;
+margin: 10px;
+width: 300px;
+height: 70px;
+}
+#imgfamily {
+    padding: 25px;
+}
+#p {
+    text-align: center;
 }
 
