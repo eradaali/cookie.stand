@@ -14,160 +14,121 @@ let hours = ["6am",
   "6pm",
   "7pm",
 ]
-
+function randomNumber(min,max){
+  return Math.floor(Math.random() * (max - min + 1)
+  + max)
+}
 let myArray = [];
 function fun(storeName, minCustPerHour, maxCustPerHour, avgCustcookies, randomCustPerHour, salesPerHour, totalPerHour) {
   this.storeName = storeName;
-  this.  minCustPerHour =minCustPerHour;
-  this.maxCustPerHour =maxCustPerHour;
+  this.minCustPerHour = minCustPerHour;
+  this.maxCustPerHour = maxCustPerHour;
   this.avgCustcookies = avgCustcookies;
-  this.randomCustPerHour = randomCustPerHour;
-  this.salesPerHour = salesPerHour;
-  this. totalPerHour = totalPerHour;
-  this.totalDailyLocation=0;
+  this.randomCustPerHour = [];
+  this.salesPerHour = [];
+  this.totalPerHour = 0;
+  this.totalDailyLocation = 0;
+  myArray.push(this);
 }
 
 
 fun.prototype.randomCustNumbe = function () {
   for (let hour = 0; hour < hours.length; hour++) {
-    let y=Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)
-    + this.maxCustPerHour)
-    this.randomCustPerHour.push(y);
-    this.totalDailyLocation+=y;
-
+    this.randomCustPerHour.push( randomNumber(this.minCustPerHour,this.maxCustPerHour));}
   }
-}
+ 
 fun.prototype.salesCookies = function () {
   for (let i = 0; i < Seattle.hours.length; i++) {
-    this.salesPerHour.push(Math.ceil(this.randomCustPerHour[i] * this.avgCustcookies));
+    this.salesPerHour.push(Math.floor(this.randomCustPerHour[i]* this.avgCustcookies));
     this.totalPerHour += this.salesPerHour[i];
   }
 }
-//let countainer =document.getElementById('sales');
 
+let Seattle = new fun('Seattle', 23, 65, 3.6);
+let Tokyo = new fun('Tokyo', 23, 24, 1.5);
+let Dubai = new fun('Dubai', 11, 38, 3.7);
+let Paris = new fun('Paris', 20, 38, 2.3);
+let Lima = new fun('Lima', 2, 16, 4.6);
+
+let parent=document.getElementById('parent');
+let table=document.getElementById('table');
+parent.appendChild(table);
+
+function myhader(){
+  let hrow =document.createElement('tr');
+  table.appendChild(hrow);
+  let thead =document.createElement('th');
+  hrow.appendChild(thead);
+  thead.textContent='name';
+  for(let i=0;i<hours.length;i++){
+    let thElement =document.createElement('th');
+    hrow.appendChild(thElement);
+    thElement.textContent=hours[i];
+  }
+  let thLast =document.createElement('th');
+  hrow.appendChild(thLast);
+  thLast.textContent='Daily Location Total';
+}
+myhader();
 
 fun.prototype.render = function () {
+let datarow=document.createElement('tr');
+table.appendChild(datarrow);
 
-  let divEl = document.getAnimations('sales');
-  let tableEl = document.createElement('table');
-  divEl.appendChild(tableEl);
-  let trl2 = document.createElement('tr');
-  tableEl.appendChild(trl2);
-  let tdLoc = document.createElement('td');
-  trl2.appendChild(tdLoc);
-  tdLoc.textContent = this.location;
-  for (let i = 0; i < this.salesPerHour.length; i++) {
-    let tdEl = document.createElement('td');
-    trl2.appendChild(tdEl);
-    tdEl.textContent = (this.salesPerHour[i]);
-    totalLi.push(this.salesPerHour[i]);
+let dataName=document.createElement('td');
+datarow.appendChild(dataName);
+dataName.textContent=this.storeName;
+for(let i=0;i<hours.length;i++){
+  let tdElement=document.createElement('td');
+  datarow.appendChild(tdElement);
+  tdElement.textContent=this.salesPerHour[i];
+}
+let totalData =document.createElement('td');
+datarow.appendChild(totalData);
+totalData=textContent.totalPerHour;
+
+}
+
+function myfooter(){
+  let footerTable =document.createElement('tr');
+  table.appendChild(footerTable);
+  let fotterth =document.createElement('th');
+  footerTable.appendChild(fotterth);
+  fotterth.textContent='total';
+  for (let i=0;i<hours.length;i++){
+    let totaleachhour=0;
+    for(let j=0;j<myArray.length;j++){
+      totaleachhour+=myArray[j].salesPerHour[i];
+    }
+    let footertotal=document.createElement('th');
+    footerTable.appendChild(footertotal);
+    footertotal.textContent=totaleachhour;
   }
-
-
-
-
 }
 
-
-
-
-
-
-
-
-
-let Seattle = new fun('First', 23, 65, 3.6, [], [], 0);
-Seattle.randomCustNumbe();
-myArray.push(Seattle);
-let Tokyo = new fun('secound', 23, 24, 1.5, [], [], 0);
-Tokyo.randomCustNumbe();
-
-myArray.push(Tokyo);
-
-let Dubai = new fun('Dubai', 11, 38, 3.7, [], [], 0);
-Dubai.randomCustNumbe();
-
-myArray.push(Dubai);
-let Paris = new fun('Paris', 20, 38, 2.3, [], [], 0);
-Paris.randomCustNumbe();
-
-myArray.push(Paris);
-let Lima = new fun('Lima', 2, 16, 4.6, [], [], 0);
-Lima.randomCustNumbe();
-
-myArray.push(Lima);
-document.write("<table>");
-document.write("<th></th>");
-
-for (let j = 0; j < hours.length; j++) {
-  document.write("<th >" + hours[j] + "</th>");
+for(let i=0;i<myArray.length;i++){
+  myArray[i].randomCustNumbe();
+  myArray[i].salesCookies();
+  myArray.render();
 }
-document.write("<th >" + "daily total location" +"</th>");
+myfooter();
 
-document.write("<tr id='tr1'></tr>")
-document.write("<tr id='tr2'></tr>")
-document.write("<tr id='tr3'></tr>")
-document.write("<tr id='tr4'></tr>")
-document.write("<tr id='tr5'></tr>")
-document.write("<tr id='tr6'></tr>")
+let shopForm =document.getElementById('forms');
+shopForm.addEventListener('submit',mysubmiter);
+function mysubmiter (event){
+  event.preventDefault();
+  table.deleteRow(table.rows.length-1);
+  let storeName=event.target.shopinput.value;
+  let minCustPerHour=event.target.mininput.value;
+  let maxCustPerHour=event.target.maxinput.value;
+  let avgCustcookies=event.target.avginput.value;
 
-
-function createCol(rowNum,tdText,tdId){
-  
-  var row = document.getElementById(`tr${rowNum}`);
-  var cell = document.createElement("td");
-  cell.style.border = "thin solid red";
-  var cellText = document.createTextNode(tdText);
-  cell.appendChild(cellText);
-  if(tdId)
-  cell.id=`rowNum${rowNum}colNum${tdId}`
-  row.appendChild(cell);
+  let newfun = new fun (storeName,minCustPerHour,maxCustPerHour,avgCustcookies,[],[],0);
+  newfun.randomCustNumbe();
+  newfun.salesCookies();
+  newfun.render();
+  myfooter();
+  document.getElementById('forms').reset();
+  console.log(newfun);
 }
-
-createCol(1,'Seattle')
-createCol(2,'Tokyo')
-createCol(3,'Dubai')
-createCol(4,'Paris')
-createCol(5,'Lima')
-createCol(6,'Totals')
-let totalPerCol=[];
-for(let i=1;i<=6;i++){
-  for(let j=1;j<15;j++){
-    
-
-    if(myArray[i-1]){
-    let value=myArray[i-1].randomCustPerHour[Math.floor(Math.random() * 13) + 1    ];
-
-    debugger
-    if(totalPerCol[j-1])
-    totalPerCol[j-1]+=value;
-    else totalPerCol.push(value);
-    console.log(totalPerCol);
-
-  createCol(i,value,j)}
-  }
-  if(myArray[i-1]){
-    let value=myArray[i-1].totalDailyLocation;
-    if(totalPerCol[14])
-    totalPerCol[14]+=value;
-
-    else 
-    totalPerCol.push(value);
-
-    createCol(i,value) 
-
-  }
-
-}
-for(let index=0;index<15;index++){
-  debugger
-  createCol(6,totalPerCol[index],index+1)
-
-}
-
-
-
-
-
-
-document.write("</table>");
+myfooter();
