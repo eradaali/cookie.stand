@@ -19,6 +19,8 @@ function randomNumber(min,max){
   + max)
 }
 let myArray = [];
+
+let totalPerHour ;
 function fun(storeName, minCustPerHour, maxCustPerHour, avgCustcookies, randomCustPerHour, salesPerHour, totalPerHour) {
   this.storeName = storeName;
   this.minCustPerHour = minCustPerHour;
@@ -26,7 +28,7 @@ function fun(storeName, minCustPerHour, maxCustPerHour, avgCustcookies, randomCu
   this.avgCustcookies = avgCustcookies;
   this.randomCustPerHour = [];
   this.salesPerHour = [];
-  this.totalPerHour = 0;
+  totalPerHour = 0;
   this.totalDailyLocation = 0;
   myArray.push(this);
 }
@@ -38,7 +40,7 @@ fun.prototype.randomCustNumbe = function () {
   }
  
 fun.prototype.salesCookies = function () {
-  for (let i = 0; i < Seattle.hours.length; i++) {
+  for (let i = 0; i < hours.length; i++) {
     this.salesPerHour.push(Math.floor(this.randomCustPerHour[i]* this.avgCustcookies));
     this.totalPerHour += this.salesPerHour[i];
   }
@@ -73,7 +75,7 @@ myhader();
 
 fun.prototype.render = function () {
 let datarow=document.createElement('tr');
-table.appendChild(datarrow);
+table.appendChild(datarow);
 
 let dataName=document.createElement('td');
 datarow.appendChild(dataName);
@@ -85,7 +87,7 @@ for(let i=0;i<hours.length;i++){
 }
 let totalData =document.createElement('td');
 datarow.appendChild(totalData);
-totalData=textContent.totalPerHour;
+totalData=Seattle.totalPerHour.textContent;
 
 }
 
@@ -107,9 +109,10 @@ function myfooter(){
 }
 
 for(let i=0;i<myArray.length;i++){
+  console.log(i);
   myArray[i].randomCustNumbe();
   myArray[i].salesCookies();
-  myArray.render();
+  myArray[i].render();
 }
 myfooter();
 
